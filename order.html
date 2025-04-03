@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order - Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        h1 {
+            color: #e74c3c;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .order-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 18px;
+        }
+
+        .order-btn:hover {
+            background: #c0392b;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 6px 12px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            z-index: 1000;
+        }
+
+        .menu-popup ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-popup li {
+            padding: 10px 0;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .menu-popup li:hover {
+            background: #f0f0f0;
+        }
+
+        .close-popup {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .selected-items {
+            text-align: left;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .about-section {
+            background: #fff;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+      .about-section {
+            background: #fff;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .about-section h2 {
+            color: #333;
+        }
+
+        .about-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Place Your Order</h1>
+        <form class="order-form" onsubmit="submitOrder(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="text" placeholder="Phone Number" required>
+            <input type="text" placeholder="Delivery Address" required>
+            <select id="food-selection" required>
+                <option value="" disabled selected>Select Food Item</option>
+                <option value="pizza">Pizza - $10</option>
+                <option value="burger">Burger - $7</option>
+                <option value="pasta">Pasta - $8</option>
+                <option value="salad">Salad - $5</option>
+                <option value="menu">View Full Menu</option>
+            </select>
+            <div class="selected-items" id="selected-items"></div>
+            <textarea placeholder="Special Instructions" rows="3"></textarea>
+            <button type="submit" class="order-btn">Submit Order</button>
+        </form>
+        <a href="index.html" class="back-btn">⬅ Back to Home</a>
+    </div>
+
+    <div class="menu-popup" id="menuPopup">
+        <h2>Full Menu</h2>
+        <ul>
+            <li onclick="selectMenuItem('Pizza - $10')">Pizza - $10</li>
+            <li onclick="selectMenuItem('Burger - $7')">Burger - $7</li>
+            <li onclick="selectMenuItem('Pasta - $8')">Pasta - $8</li>
+            <li onclick="selectMenuItem('Salad - $5')">Salad - $5</li>
+            <li onclick="selectMenuItem('Steak - $15')">Steak - $15</li>
+        </ul>
+        <button class="close-popup" onclick="closeMenu()">Close</button>
+    </div>
+     <div class="about-section" id="about">
+        <h2>About Our Restaurant</h2>
+        <p>Welcome to our restaurant, where we serve delicious food made from fresh ingredients. Our mission is to provide high-quality meals and an excellent dining experience.</p>
+        <p>We offer a wide variety of dishes, including pizza, burgers, pasta, and healthy salads. Our chefs are experts in crafting meals that satisfy every taste.</p>
+        <p>Located in multiple locations, we ensure the best service and fast delivery. Thank you for choosing us!</p>
+    </div>
+    <script>
+        const inputs = document.querySelectorAll(".order-form input, .order-form select");
+
+inputs.forEach(input => {
+    input.addEventListener("focus", () => {
+        input.style.transform = "scale(1.05)";
+        input.style.transition = "0.3s ease";
+    });
+    input.addEventListener("blur", () => {
+        input.style.transform = "scale(1)";
+    });
+});
+
+        document.getElementById('food-selection').addEventListener('change', function() {
+            if (this.value === 'menu') {
+                document.getElementById('menuPopup').style.display = 'block';
+                this.value = "";
+            } else {
+                addSelectedItem(this.options[this.selectedIndex].text);
+            }
+        });
+
+        function selectMenuItem(item) {
+            addSelectedItem(item);
+            closeMenu();
+        }
+
+        function addSelectedItem(item) {
+            const selectedItemsDiv = document.getElementById('selected-items');
+            selectedItemsDiv.innerHTML += `<p>${item}</p>`;
+        }
+
+        function closeMenu() {
+            document.getElementById('menuPopup').style.display = 'none';
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            alert("Your order has been placed successfully! Our team will contact you shortly.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Party - Celebrate With Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            text-align: center;
+            color: #333;
+        }
+
+        .hero {
+            background: url('party.png') center/cover no-repeat;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .party-info, .booking-form, .gallery, .map-section, .discounts {
+            padding: 40px;
+            background: white;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .party-packages {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .package-card {
+            background: white;
+            padding: 20px;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .package-card h3 {
+            color: #e74c3c;
+        }
+
+        .book-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #c0392b;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .live-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+             
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff4081;
+            top: 0;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            from { transform: translateY(-10vh); }
+            to { transform: translateY(100vh); }
+        }
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: gold;
+            border-radius: 50%;
+            animation: explode 0.8s ease-out forwards;
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+                
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>🎉 Celebrate Your Birthday With Us! 🎂</h1>
+    </section>
+
+    <section class="party-info">
+        <h2>Why Choose Our Venue?</h2>
+        <p>We offer the perfect space, delicious food, and exciting themes to make your birthday memorable!</p>
+    </section>
+
+    <section class="party-packages">
+        <div class="package-card">
+            <h3>Basic Package</h3>
+            <p>Includes venue, decorations, and a cake.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="package-card">
+            <h3>Premium Package</h3>
+            <p>Everything in Basic + Catering and DJ.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="package-card">
+            <h3>VIP Package</h3>
+            <p>All-inclusive luxury experience.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+    </section>
+
+    
+
+    <section class="gallery">
+        <h2>Memorable Moments</h2>
+        <img src="memory.jpg" alt="Birthday Party">
+        <img src="decorationn.jpg" alt="Decorations">
+    </section>
+
+    <section class="map-section">
+        <h2>Our Party Venues</h2>
+        <iframe src="https://maps.google.com/maps?q=restaurant%20venue&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border-radius: 10px;"></iframe>
+    </section>
+
+    <section class="discounts">
+        <h2>Special Offers</h2>
+        <p>Book now and get 15% OFF on early reservations!</p>
+    </section>
+
+    <button class="live-chat-btn">💬 Live Chat</button>
+    <script>
+        document.querySelectorAll(".book-btn").forEach(button => {
+            button.addEventListener("click", function(event) {
+                let firework = document.createElement("div");
+                firework.classList.add("firework");
+                firework.style.left = `${event.clientX}px`;
+                firework.style.top = `${event.clientY}px`;
+                document.body.appendChild(firework);
+        
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            });
+        });
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const confettiContainer = document.createElement("div");
+            confettiContainer.classList.add("confetti");
+            document.body.appendChild(confettiContainer);
+        
+            for (let i = 0; i < 50; i++) {
+                let confettiPiece = document.createElement("div");
+                confettiPiece.classList.add("confetti-piece");
+                confettiPiece.style.left = `${Math.random() * 100}vw`;
+                confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confettiContainer.appendChild(confettiPiece);
+            }
+        });
+        
+    </script>
+</body>
+</html>

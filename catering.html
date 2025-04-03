@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Services - Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f2709c, #ff9472);
+            text-align: center;
+            color: #333;
+        }
+
+        .hero {
+            background: url('catering.jpg') center/cover no-repeat;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .catering-info {
+            padding: 40px;
+            background: white;
+        }
+
+        .catering-packages {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .package-card {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .package-card h3 {
+            color: #e74c3c;
+        }
+
+        .package-card p {
+            color: #666;
+        }
+
+        .book-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f9f9f9;
+            padding: 40px;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            margin: 10px;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 20px;
+            margin: 30px auto;
+            width: 30%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(242, 241, 241, 0.2);
+        }
+        
+        .contact-form input, .contact-form textarea {
+            width: 75%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .contact-form button {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background: #c0392b;
+        }
+        .menu-card {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>🍽️ Premium Catering Services</h1>
+    </section>
+
+    <section class="catering-info">
+        <h2>Why Choose Our Catering?</h2>
+        <p>We provide top-quality food, exceptional service, and customized menus for all events.</p>
+    </section>
+
+    <section class="catering-packages">
+        <div class="package-card">
+            <h3>Basic Package</h3>
+            <p>Includes buffet for 50 people.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="package-card">
+            <h3>Premium Package</h3>
+            <p>Everything in Basic + Live Cooking Station.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="package-card">
+            <h3>Luxury Package</h3>
+            <p>All-inclusive gourmet dining experience.</p>
+            <button class="book-btn">Book Now</button>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <h2>Customer Testimonials</h2>
+        <div class="testimonial">⭐️⭐️⭐️⭐️⭐️ "The food was amazing!"</div>
+        <div class="testimonial">⭐️⭐️⭐️⭐️ "Highly professional service!"</div>
+    </section>
+    
+    <section class="contact-form">
+        <h2>Contact Us for Custom Catering</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Describe your event" rows="4" required></textarea>
+            <button type="submit">Submit Inquiry</button>
+        </form>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuCards = document.querySelectorAll(".menu-card");
+            menuCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0)";
+                    card.style.transition = "all 0.8s ease";
+                }, index * 300);
+            });
+        });
+        
+    </script>
+</body>
+</html>

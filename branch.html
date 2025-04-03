@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Branches - Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+
+        .branch-info {
+            margin: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Our Branches</h1>
+    <p>Find your nearest branch and visit us!</p>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            const locations = [
+                { name: "Branch 1 - Mumbai", lat: 19.0760, lng: 72.8777, address: "Mumbai, India", contact: "+91 1234567890" },
+                { name: "Branch 2 - Delhi", lat: 28.7041, lng: 77.1025, address: "Delhi, India", contact: "+91 9876543210" },
+                { name: "Branch 3 - Bangalore", lat: 12.9716, lng: 77.5946, address: "Bangalore, India", contact: "+91 1122334455" }
+            ];
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 5,
+                center: { lat: 22.3511, lng: 78.6677 }
+            });
+
+            locations.forEach(location => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.name
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<h3>${location.name}</h3><p>${location.address}</p><p>📞 ${location.contact}</p>`
+                });
+
+                marker.addListener("click", () => {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+
+    <!-- Google Maps API (Replace with your API Key) -->
+    <script defer src="AIzaSyB4vqrghZpIQdcLKLEPQHUcnAlpMozWhws"></script>
+
+</body>
+</html>
